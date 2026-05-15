@@ -122,9 +122,9 @@ const Welcome = ({
         ))}
         <SlideUp show={transitionIds.includes(TITLE.length)}>
           <Flex className={`text-15pxr leading-18pxr mt-16pxr`}>
-            <Text display="block">2024.06.08, SATURDAY 16:00</Text>
+            <Text display="block">2026.09.05, SATURDAY 11:00</Text>
             <Text display="block" className="mt-8pxr">
-              SAMCHEONGGAK
+              WEDDINGSQUARE
             </Text>
           </Flex>
         </SlideUp>
