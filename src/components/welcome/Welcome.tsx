@@ -101,7 +101,7 @@ const Welcome = ({
         ref={imageRef}
         className="w-full absolute bottom-0 left-0"
         alt="wedding"
-        src="/welcome/img_wedding_main.png"
+        src="/welcome/IMG_9271.jpeg"
         width={860}
         height={1864}
         onLoad={() => {
