@@ -6,15 +6,15 @@ import { PretendardFont } from "@/style/fonts";
 import { ToastProvider } from "@/components/toast/ToastProvider";
 
 export const metadata: Metadata = {
-  title: "구태훈, 김단희 결혼합니다♡",
-  description: "6월 8일 토요일 오후 4시 삼청각 일화당",
+  title: "병섭, 희연 결혼합니다♡",
+  description: "9월 5일 토요일 오전 11시 웨딩스퀘어 강변",
 
   openGraph: {
     type: "website",
 
-    title: "구태훈, 김단희 결혼합니다♡",
+    title: "병섭, 희연 결혼합니다♡",
     locale: "ko_KR",
-    description: "6월 8일 토요일 오후 4시 삼청각 일화당",
+    description: "9월 5일 토요일 오전 11시 웨딩스퀘어 강변",
     images: [
       {
         url: "https://cdn.jsdelivr.net/gh/Hal-ang/wedding_CDN_repo@master/sns.png", // Must be an absolute URL
