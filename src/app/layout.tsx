@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     description: "9월 5일 토요일 오전 11시 웨딩스퀘어 강변",
     images: [
       {
-        url: "https://cdn.jsdelivr.net/gh/Hal-ang/wedding_CDN_repo@master/sns.png", // Must be an absolute URL
+        url: "/profile/IMG_8813.png", // Must be an absolute URL
         width: 720,
         height: 720
       }
