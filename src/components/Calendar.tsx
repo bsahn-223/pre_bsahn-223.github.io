@@ -1,13 +1,16 @@
 import React, { ReactNode } from "react";
 
-import SlideUp from "./SlideUp";
 import Text from "./Text";
 
-const Calendar = ({ children }: { children: ReactNode }) => {
+interface CalendarProps {
+  children: ReactNode;
+}
+
+const Calendar = function Calendar({ children }: CalendarProps) {
   return <div className="w-full grid grid-cols-7 gap-y-12pxr">{children}</div>;
 };
 
-// 1. 일반 함수(function) 문법을 쓰면 React와 ESLint가 자동으로 이름을 인식하여 displayName 생략이 가능합니다.
+// 1. 요일 표시 컴포넌트 (일~토)
 Calendar.Days = function CalendarDays() {
   return ["일", "월", "화", "수", "목", "금", "토"].map((day, i) => (
     <Text
@@ -29,7 +32,7 @@ interface CalendarDatesProps {
   startDayOffset?: number;
 }
 
-// 2. Dates 컴포넌트도 일반 함수로 작성하여 TypeScript와 ESLint 에러를 원천 차단합니다.
+// 2. 날짜 표시 컴포넌트 (오프셋 반영 및 빌드 에러 방지 구문 적용)
 Calendar.Dates = function CalendarDates({
   startDate,
   endDate,
@@ -41,10 +44,12 @@ Calendar.Dates = function CalendarDates({
 
   return (
     <>
+      {/* 화요일 시작을 위해 앞에 빈 칸 배치 */}
       {emptySpaces.map((_, index) => (
         <div key={`empty-${index}`} className="w-full" />
       ))}
 
+      {/* 실제 날짜 렌더링 */}
       {totalDates.map((_, i) => {
         const currentDate = startDate + i;
         const isActive = currentDate === activeDate;
@@ -52,7 +57,7 @@ Calendar.Dates = function CalendarDates({
 
         return (
           <div
-            key={i}
+            key={currentDate}
             className="w-full text-center flex justify-center items-center"
           >
             <Text
