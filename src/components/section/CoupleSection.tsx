@@ -75,7 +75,7 @@ const CoupleSection = () => {
       <SlideUp show={transitionIds.includes(TITLE.length + 1)}>
         <CoupleImage
           url="/profile/profile_danhee.jpg"
-          person={{ name: "안희연", desc: "상덕, 영미의 딸" }}
+          person={{ name: "안희연", desc: "창덕, 영미의 딸" }}
         />
       </SlideUp>
     </section>
