@@ -7,8 +7,8 @@ const Calendar = ({ children }: { children: ReactNode }) => {
   return <div className="w-full grid grid-cols-7 gap-y-12pxr">{children}</div>;
 };
 
-// 1. Calendar.Days 컴포넌트에 기입용 기명 함수 스타일 적용
-const CalendarDays = () => {
+// 1. 일반 함수(function) 문법을 쓰면 React와 ESLint가 자동으로 이름을 인식하여 displayName 생략이 가능합니다.
+Calendar.Days = function CalendarDays() {
   return ["일", "월", "화", "수", "목", "금", "토"].map((day, i) => (
     <Text
       key={day}
@@ -22,18 +22,20 @@ const CalendarDays = () => {
   ));
 };
 
-// 2. Calendar.Dates 컴포넌트에 기입용 기명 함수 스타일 적용
-const CalendarDates = ({
-  startDate,
-  endDate,
-  activeDate,
-  startDayOffset = 0
-}: {
+interface CalendarDatesProps {
   startDate: number;
   endDate: number;
   activeDate: number;
   startDayOffset?: number;
-}) => {
+}
+
+// 2. Dates 컴포넌트도 일반 함수로 작성하여 TypeScript와 ESLint 에러를 원천 차단합니다.
+Calendar.Dates = function CalendarDates({
+  startDate,
+  endDate,
+  activeDate,
+  startDayOffset = 0
+}: CalendarDatesProps) {
   const emptySpaces = Array.from({ length: startDayOffset });
   const totalDates = Array.from({ length: endDate - startDate + 1 });
 
@@ -71,12 +73,5 @@ const CalendarDates = ({
     </>
   );
 };
-
-// 서브 컴포넌트 등록 및 명시적 displayName 선언 (ESLint 에러 해결)
-Calendar.Days = CalendarDays;
-Calendar.Days.displayName = "Calendar.Days";
-
-Calendar.Dates = CalendarDates;
-Calendar.Dates.displayName = "Calendar.Dates";
 
 export default Calendar;
