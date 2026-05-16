@@ -9,29 +9,60 @@ import NaverMap from "../../../public/naverMap.svg";
 import TMap from "../../../public/tMap.svg";
 
 const Navigations = () => {
+  const destinationName = "웨딩스퀘어 강변";
+  const encodedName = encodeURIComponent(destinationName);
+  const lat = 37.535889; // 위도
+  const lng = 127.096018; // 경도
+
+  // 1. 카카오내비 실행 함수
   const handleKakaoNavi: MouseEventHandler = useCallback((e) => {
     e.preventDefault();
-
-    // 1. 카카오내비 모바일 앱 스킴 URL 생성 (목적지 좌표 및 이름 인코딩)
-    const destinationName = encodeURIComponent("웨딩스퀘어 강변");
-    const lat = 37.535889; // 위도
-    const lng = 127.096018; // 경도
-
-    // 카카오맵/내비 실행 스킴 URL
     const kakaoAppUrl = `kakaomap://route?ep=${lat},${lng}&by=CAR`;
-    const kakaoWebUrl = `https://kakao.com{destinationName},${lat},${lng}`;
+    const kakaoWebUrl = `https://kakao.com{encodedName},${lat},${lng}`;
 
-    // 2. 모바일 브라우저 환경에서 앱 실행 시도 후 미설치 시 웹으로 이동하는 폴백 처리
     const startTime = Date.now();
     window.location.href = kakaoAppUrl;
 
     setTimeout(() => {
-      // 1.5초 이내에 앱이 열리지 않았다면 (화면이 백그라운드로 전환되지 않았다면) 웹 페이지 전환
       if (Date.now() - startTime < 2000) {
         window.location.href = kakaoWebUrl;
       }
     }, 1500);
-  }, []);
+  }, [encodedName]);
+
+  // 2. 네이버 지도 모바일 딥링크 
+  // 앱이 있으면 네이버 지도 앱 길찾기로 바로 연결, 없으면 모바일 웹 주소로 전환됩니다.
+  const naverMapUrl = `nmap://route/car?dlat=${lat}&dlng=${lng}&dname=${encodedName}&appname=${encodeURIComponent("wedding-invitation")}`;
+  const fallbackNaverUrl = `https://naver.com{encodedName}&ex=${lng}&ey=${lat}&pathType=0`;
+
+  const handleNaverMap: MouseEventHandler = useCallback((e) => {
+    e.preventDefault();
+    const startTime = Date.now();
+    window.location.href = naverMapUrl;
+
+    setTimeout(() => {
+      if (Date.now() - startTime < 2000) {
+        window.location.href = fallbackNaverUrl;
+      }
+    }, 1500);
+  }, [naverMapUrl, fallbackNaverUrl]);
+
+  // 3. 티맵 모바일 딥링크
+  // 앱이 있으면 티맵 앱이 켜지며 목적지가 지정되고, 없으면 티맵 모바일 웹 다운로드/안내 페이지로 연결됩니다.
+  const tMapUrl = `tmap://route?rGoName=${encodedName}&rGoX=${lng}&rGoY=${lat}`;
+  const fallbackTMapUrl = `https://tmap.co.kr{encodedName}&x=${lng}&y=${lat}`;
+
+  const handleTMap: MouseEventHandler = useCallback((e) => {
+    e.preventDefault();
+    const startTime = Date.now();
+    window.location.href = tMapUrl;
+
+    setTimeout(() => {
+      if (Date.now() - startTime < 2000) {
+        window.location.href = fallbackTMapUrl;
+      }
+    }, 1500);
+  }, [tMapUrl, fallbackTMapUrl]);
 
   return (
     <Flex
@@ -44,18 +75,9 @@ const Navigations = () => {
         e.stopPropagation();
       }}
     >
-      {/* 모바일에서 터치하기 편하도록 cursor-pointer 및 크기 적용 확인 */}
       <Kakao onClick={handleKakaoNavi} className="flex-none cursor-pointer" />
-
-      {/* 네이버 지도 모바일 딥링크 호환 */}
-      <Link href="https://naver.me" target="_blank" rel="noopener noreferrer">
-        <NaverMap className="flex-none" />
-      </Link>
-      
-      {/* 티맵 모바일 딥링크 호환 */}
-      <Link href="https://tmap.life" target="_blank" rel="noopener noreferrer">
-        <TMap className="flex-none" />
-      </Link>
+      <NaverMap onClick={handleNaverMap} className="flex-none cursor-pointer" />
+      <TMap onClick={handleTMap} className="flex-none cursor-pointer" />
     </Flex>
   );
 };
