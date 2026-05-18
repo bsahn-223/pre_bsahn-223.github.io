@@ -11,13 +11,13 @@ const KakaoSDK = ({ children }: { children: ReactNode }) => {
     const script = document.createElement("script");
     script.id = "kakao-sdk";
     script.async = true;
-    script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.7.1/kakao.min.js";
+    script.src = "https://t1.kakaocdn.net/kakao_js_sdk/2.8.1/kakao.min.js";
     script.integrity =
-      "sha384-kDljxUXHaJ9xAb2AzRd59KxjrFjzHa5TAoFQ6GbYTCAG0bjM55XohjjDT7tDDC01";
+      "sha384-OL+ylM/iuPLtW5U3XcvLSGhE8JzReKDank5InqlHGWPhb4140/yrBw0bg0y7+C9J";
     script.crossOrigin = "anonymous";
 
     script.onload = () => {
-      window.Kakao.init("7abc44b737ca7c70cf509f0c9d3c98ed");
+      window.Kakao.init("1a1b420e11557ddb2626a319a5d4b1b9");
       console.log("Kakao SDK loaded");
     };
     document.body.appendChild(script);
