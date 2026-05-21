@@ -13,7 +13,6 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 
 import FadeIn from "../FadeIn";
 import Image from "next/image";
-import ImageDetails from "../ImageDetails";
 import ProgressBar from "./ProgressBar";
 import SlideUp from "../SlideUp";
 import Spacing from "../Spacing";
@@ -26,16 +25,18 @@ const getGalleryImageLoader = (number: number) => {
 const IMAGES = Array.from({ length: 10 }, (_, i) => ({
   url: getGalleryImageLoader(i + 1)
 }));
+
 const GallerySection = () => {
   const [selectedIndex, setSlectedIndex] = useState(0);
-
   const sliderRef = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
+  const [transitionIds, setTransitionIds] = useState<number[]>([]);
+  const [swiper, setSwiper] = useState<SwiperClass>();
 
   useEffect(() => {
     if (!sliderRef.current) return;
 
     const target = document.getElementById(`small-image-${selectedIndex}`);
-
     if (!target) return;
     const slider = sliderRef.current;
 
@@ -52,12 +53,6 @@ const GallerySection = () => {
     });
   }, [selectedIndex]);
 
-  const [visibleModal, setVisibleModal] = useState(false);
-
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [transitionIds, setTransitionIds] = useState<number[]>([]);
-
   const handleTransition = useCallback(() => {
     setTransitionIds((prev) => prev.concat(prev.length));
   }, []);
@@ -69,8 +64,6 @@ const GallerySection = () => {
     [selectedIndex]
   );
 
-  const [swiper, setSwiper] = useState<SwiperClass>();
-
   return (
     <>
       <section ref={ref} id="gallery-section" className="w-full">
@@ -81,7 +74,8 @@ const GallerySection = () => {
         <Spacing size={10} />
 
         <FadeIn show={isInView}>
-          <div className="w-full px-24pxr">
+          {/* 1. 이미지 크기를 작게 조절하는 부분 (px-24pxr -> max-w 및 mx-auto 추가) */}
+          <div className="w-full max-w-400pxr mx-auto px-24pxr">
             <Swiper
               loop
               initialSlide={selectedIndex}
@@ -91,21 +85,19 @@ const GallerySection = () => {
             >
               {IMAGES.map((image, index) => (
                 <SwiperSlide key={index}>
+                  {/* 2. 클릭 시 사랑(모달) 안 뜨게 하고 커서 모양 기본으로 수정 */}
                   <img
-                    className={`w-full cursor-pointer`}
+                    className="w-full object-contain"
                     alt="selected-image"
                     src={image.url}
                     width={764}
                     height={1146}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setVisibleModal(true);
-                    }}
                   />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
+          
           <Spacing size={16} />
           <div className="w-full px-24pxr">
             <ProgressBar width={`${progressPercent}%`} />
@@ -124,12 +116,11 @@ const GallerySection = () => {
                   e.stopPropagation();
                   swiper?.slideToLoop(index);
                 }}
-                className={`relative cursor-pointer w-60pxr h-90pxr flex-none`}
+                className="relative cursor-pointer w-60pxr h-90pxr flex-none"
               >
                 <Image
                   quality={100}
                   loading="lazy"
-                  key={index}
                   alt="preview"
                   src={image.url}
                   width={120}
@@ -148,20 +139,8 @@ const GallerySection = () => {
           </div>
         </FadeIn>
       </section>
-
-      {visibleModal && (
-        <ImageDetails
-          onSlideChange={(index) => {
-            swiper?.slideToLoop(index);
-          }}
-          selectedIndex={selectedIndex}
-          isOpen={visibleModal}
-          onClose={() => {
-            setVisibleModal(false);
-          }}
-          images={IMAGES}
-        />
-      )}
+      
+      {/* 사용하지 않는 ImageDetails 모달 컴포넌트 코드 삭제 */}
     </>
   );
 };
