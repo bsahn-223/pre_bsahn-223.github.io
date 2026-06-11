@@ -26,7 +26,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
     setTransitionIds((prev) => {
       return prev.concat(prev.length);
     });
-  }, 100);
+  }, 50);
   useIsInView(ref, () => setStartTransition(true));
 
   const [callTimeout, setCallTimeout] = useState(false);
@@ -44,7 +44,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
 
     setTimeout(() => {
       setCallTimeout(true);
-    }, 1000);
+    }, 200);
 
     const intervalId = setInterval(() => {
       setTransitionIds((prev) => {
@@ -59,7 +59,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
     const timeoutId = setTimeout(() => {
       setTransitionIds((prev) => prev.concat(TITLE.length + 2));
       clearTimeout(timeoutId);
-    }, 1000);
+    }, 200);
     onDone();
   }, [startTransition]);
 
