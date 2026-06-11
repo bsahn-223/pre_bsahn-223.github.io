@@ -73,16 +73,16 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
         ))}
         <Spacing size={20} />
 return (
-  <>
-    <section ref={ref} id="account-section" className="w-full px-24pxr">
-      {TITLE.map((title, i) => (
-        <SlideUp key={title} show={transitionIds.includes(i)}>
-          <Title>{title}</Title>
-        </SlideUp>
-      ))}
-      
-      <Spacing size={20} />
-      
+    <>
+      <section ref={ref} id="account-section" className="w-full px-24pxr">
+        {TITLE.map((title, i) => (
+          <SlideUp key={title} show={transitionIds.includes(i)}>
+            <Title>{title}</Title>
+          </SlideUp>
+        ))}
+        
+        <Spacing size={20} />
+        
         {/* 1. 신랑측 계좌번호 영역 */}
         <SlideUp show={transitionIds.includes(TITLE.length)}>
           <Arcodion>
