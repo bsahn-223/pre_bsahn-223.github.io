@@ -26,7 +26,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
     setTransitionIds((prev) => {
       return prev.concat(prev.length);
     });
-  }, 200);
+  }, 100);
   useIsInView(ref, () => setStartTransition(true));
 
   const [callTimeout, setCallTimeout] = useState(false);
@@ -37,14 +37,14 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
     setTransitionIds((prev) => {
       return prev.concat(prev.length);
     });
-  }, 100);
+  }, 50);
 
   useEffect(() => {
     if (!startTransition) return;
 
     setTimeout(() => {
       setCallTimeout(true);
-    }, 1400);
+    }, 1000);
 
     const intervalId = setInterval(() => {
       setTransitionIds((prev) => {
@@ -54,7 +54,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
         }
         return prev.concat(prev.length);
       });
-    }, 100);
+    }, 50);
 
     const timeoutId = setTimeout(() => {
       setTransitionIds((prev) => prev.concat(TITLE.length + 2));
@@ -72,6 +72,18 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
           </SlideUp>
         ))}
         <Spacing size={20} />
+return (
+  <>
+    <section ref={ref} id="account-section" className="w-full px-24pxr">
+      {TITLE.map((title, i) => (
+        <SlideUp key={title} show={transitionIds.includes(i)}>
+          <Title>{title}</Title>
+        </SlideUp>
+      ))}
+      
+      <Spacing size={20} />
+      
+        {/* 1. 신랑측 계좌번호 영역 */}
         <SlideUp show={transitionIds.includes(TITLE.length)}>
           <Arcodion>
             <Arcodion.Header className="cursor-pointer w-full py-21.5pxr border-t border-black">
@@ -79,6 +91,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
               <Arcodion.Arrow />
             </Arcodion.Header>
             <Arcodion.Content>
+              {/* 신랑 본인 계좌 */}
               <Account
                 name="안병섭"
                 bankInfo={{
@@ -86,11 +99,23 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
                   accountNumber: "100166342894"
                 }}
               />
-              <Spacing size={1} />
+              <Spacing size={12} /> {/* 👈 계좌 간의 간격 추가 */}
+              
+              {/* 신랑 아버님 혹은 어머님 계좌 추가 (예시) */}
+              <Account
+                name="신랑 부친 OOO"
+                bankInfo={{
+                  bankName: "OO은행",
+                  accountNumber: "000-000-000000"
+                }}
+              />
             </Arcodion.Content>
           </Arcodion>
         </SlideUp>
+        
         <Spacing size={20} />
+        
+        {/* 2. 신부측 계좌번호 영역 */}
         <SlideUp show={transitionIds.includes(TITLE.length + 1)}>
           <Arcodion>
             <Arcodion.Header className="cursor-pointer w-full py-21.5pxr border-t border-black">
@@ -98,6 +123,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
               <Arcodion.Arrow />
             </Arcodion.Header>
             <Arcodion.Content>
+              {/* 신부 본인 계좌 */}
               <Account
                 name="안희연"
                 bankInfo={{
@@ -105,12 +131,23 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
                   accountNumber: "100062438989"
                 }}
               />
-              <Spacing size={1} />
+              <Spacing size={12} /> {/* 👈 계좌 간의 간격 추가 */}
+              
+              {/* 신부 아버님 혹은 어머님 계좌 추가 (예시) */}
+              <Account
+                name="신부 부친 OOO"
+                bankInfo={{
+                  bankName: "OO은행",
+                  accountNumber: "000-000-000000"
+                }}
+              />
             </Arcodion.Content>
           </Arcodion>
         </SlideUp>
       </section>
+      
       <Spacing size={100} />
+      
       <SlideUp show={transitionIds.includes(TITLE.length + 2)}>
         <FooterSection />
       </SlideUp>
