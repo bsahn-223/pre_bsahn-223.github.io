@@ -52,7 +52,7 @@ const Welcome = ({
     setTransitionIds((prev) => {
       return prev.concat(prev.length);
     });
-  }, 100);
+  }, 50);
 
   // 4. 하단 서브 텍스트 및 화살표 등장 타이머
   useEffect(() => {
@@ -60,11 +60,11 @@ const Welcome = ({
 
     const timeout = setTimeout(() => {
       setTransitionIds((prev) => prev.concat(prev.length));
-    }, 1800);
+    }, 1200);
 
     const timeout2 = setTimeout(() => {
       setTransitionIds((prev) => prev.concat(prev.length));
-    }, 3000);
+    }, 2000);
 
     return () => {
       clearTimeout(timeout);
