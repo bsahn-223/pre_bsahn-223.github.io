@@ -21,12 +21,12 @@ export default function CalendarSection() {
   useInterval(() => {
     if (!startTransition || transitionIds.length >= TITLE.length) return;
     setTransitionIds((prev) => prev.concat(prev.length));
-  }, 100);
+  }, 50);
 
   useInterval(() => {
     if (!startTransition || !callTimeout || transitionIds.length >= TITLE.length + 5) return;
     setTransitionIds((prev) => prev.concat(prev.length));
-  }, 100);
+  }, 50);
 
   useEffect(() => {
     if (!startTransition) return;
