@@ -12,7 +12,7 @@ import Text from "../Text";
 import Title from "./Title";
 import useIsInView from "@/hooks/useIsInView";
 
-const TITLE = ["wedding", "square", " ", " "];
+const TITLE = ["", "LOCATION", " ", " "];
 const AddressSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [transitionIds, setTransitionIds] = useState<number[]>([]);
