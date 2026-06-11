@@ -72,18 +72,8 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
           </SlideUp>
         ))}
         <Spacing size={20} />
-return (
-    <>
-      <section ref={ref} id="account-section" className="w-full px-24pxr">
-        {TITLE.map((title, i) => (
-          <SlideUp key={title} show={transitionIds.includes(i)}>
-            <Title>{title}</Title>
-          </SlideUp>
-        ))}
         
-        <Spacing size={20} />
-        
-        {/* 1. 신랑측 계좌번호 영역 */}
+        {/* 신랑측 아코디언 */}
         <SlideUp show={transitionIds.includes(TITLE.length)}>
           <Arcodion>
             <Arcodion.Header className="cursor-pointer w-full py-21.5pxr border-t border-black">
@@ -91,7 +81,7 @@ return (
               <Arcodion.Arrow />
             </Arcodion.Header>
             <Arcodion.Content>
-              {/* 신랑 본인 계좌 */}
+              {/* 신랑 본인 */}
               <Account
                 name="안병섭"
                 bankInfo={{
@@ -99,11 +89,19 @@ return (
                   accountNumber: "100166342894"
                 }}
               />
-              <Spacing size={12} /> {/* 👈 계좌 간의 간격 추가 */}
-              
-              {/* 신랑 아버님 혹은 어머님 계좌 추가 (예시) */}
+              <Spacing size={12} />
+              {/* 신랑 아버님 계좌 */}
               <Account
-                name="신랑 부친 OOO"
+                name="아버지 OOO"
+                bankInfo={{
+                  bankName: "OO은행",
+                  accountNumber: "000-000-000000"
+                }}
+              />
+              <Spacing size={12} />
+              {/* 신랑 어머님 계좌 (필요 없으시다면 이 <Account />와 바로 위 <Spacing />을 지우시면 됩니다) */}
+              <Account
+                name="어머니 OOO"
                 bankInfo={{
                   bankName: "OO은행",
                   accountNumber: "000-000-000000"
@@ -115,7 +113,7 @@ return (
         
         <Spacing size={20} />
         
-        {/* 2. 신부측 계좌번호 영역 */}
+        {/* 신부측 아코디언 */}
         <SlideUp show={transitionIds.includes(TITLE.length + 1)}>
           <Arcodion>
             <Arcodion.Header className="cursor-pointer w-full py-21.5pxr border-t border-black">
@@ -123,7 +121,7 @@ return (
               <Arcodion.Arrow />
             </Arcodion.Header>
             <Arcodion.Content>
-              {/* 신부 본인 계좌 */}
+              {/* 신부 본인 */}
               <Account
                 name="안희연"
                 bankInfo={{
@@ -131,11 +129,19 @@ return (
                   accountNumber: "100062438989"
                 }}
               />
-              <Spacing size={12} /> {/* 👈 계좌 간의 간격 추가 */}
-              
-              {/* 신부 아버님 혹은 어머님 계좌 추가 (예시) */}
+              <Spacing size={12} />
+              {/* 신부 아버님 계좌 */}
               <Account
-                name="신부 부친 OOO"
+                name="아버지 OOO"
+                bankInfo={{
+                  bankName: "OO은행",
+                  accountNumber: "000-000-000000"
+                }}
+              />
+              <Spacing size={12} />
+              {/* 신부 어머님 계좌 */}
+              <Account
+                name="어머니 OOO"
                 bankInfo={{
                   bankName: "OO은행",
                   accountNumber: "000-000-000000"
