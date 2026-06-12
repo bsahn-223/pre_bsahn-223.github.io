@@ -70,7 +70,7 @@ const AddressSection = () => {
         <SlideUp show={transitionIds.includes(TITLE.length)}>
           <Address
             title="웨딩스퀘어 강변"
-            desc={`서울 광진구 광나루로 56길 85, 3~4층\n02.3424.7000`}
+            desc={`서울 광진구 광나루로 56길 85, 4층 아모르홀\n02.3424.7000`}
           />
         </SlideUp>
         <Spacing size={20} />
