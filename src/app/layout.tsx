@@ -7,7 +7,7 @@ import { ToastProvider } from "@/components/toast/ToastProvider";
 
 export const metadata: Metadata = {
   title: "병섭, 희연 결혼합니다♡",
-  description: "9월 5일 토요일 오전 11시 웨딩스퀘어 강변",
+  description: "9월 5일 토요일 오전 11시 웨딩스퀘어 강변 4층 아모르홀",
 
   openGraph: {
     type: "website",
