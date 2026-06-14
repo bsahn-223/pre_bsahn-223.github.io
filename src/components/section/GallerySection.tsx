@@ -22,7 +22,7 @@ import useIsInView from "@/hooks/useIsInView";
 const getGalleryImageLoader = (number: number) => {
   return `/gallery/gallery_${number < 10 ? `0${number}` : number}.JPEG`;
 };
-const IMAGES = Array.from({ length: 11 }, (_, i) => ({
+const IMAGES = Array.from({ length: 18 }, (_, i) => ({
   url: getGalleryImageLoader(i + 1)
 }));
 
