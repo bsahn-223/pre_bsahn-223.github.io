@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // 1. GitHub Pages 배포를 위한 정적 내보내기 설정
+  output: 'export',
+  
+  // 2. 하위 리포지토리 경로 설정 (앞뒤에 슬래시 '/' 확인)
+  basePath: '/pre_bsahn-223.github.io',
+  assetPrefix: '/pre_bsahn-223.github.io/',
+
   webpack(config) {
     // Grab the existing rule that handles SVG imports
     const fileLoaderRule = config.module.rules.find((rule) =>
@@ -28,6 +35,8 @@ const nextConfig = {
     return config;
   },
   images: {
+    // 주의: output: 'export' 환경에서는 Next.js 기본 <Image> 컴포넌트의 
+    // 이미지 최적화 기능(unoptimized: true 설정 필요 가능성 있음)을 확인해야 할 수 있습니다.
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
