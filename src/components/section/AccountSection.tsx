@@ -19,12 +19,12 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
   const [startTransition, setStartTransition] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  // 1. 글자 및 아코디언 상자들이 차례대로 타타탁 켜지는 타이머 (50ms 간격으로 매우 빠르게)
+  // 1. 글자 및 아코디언 상자들이 차례대로 타타탁 켜지는 타이머
+  // 신랑측만 있으므로 타이머 최대 범위를 TITLE.length + 2 로 수정합니다.
   useInterval(() => {
-    if (!startTransition || transitionIds.length >= TITLE.length + 3) return;
+    if (!startTransition || transitionIds.length >= TITLE.length + 2) return;
 
     setTransitionIds((prev) => {
-      // 순차적으로 다음 인덱스를 안전하게 추가
       if (prev.includes(prev.length)) return prev;
       return prev.concat(prev.length);
     });
@@ -35,7 +35,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
 
   // 2. 애니메이션이 모두 끝난 후 부모 컴포넌트에 알림
   useEffect(() => {
-    if (transitionIds.length >= TITLE.length + 3) {
+    if (transitionIds.length >= TITLE.length + 2) {
       onDone();
     }
   }, [transitionIds, onDone]);
@@ -87,11 +87,12 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
             </Arcodion.Content>
           </Arcodion>
         </SlideUp>
+      </section> {/* 💡 누락되었던 닫는 태그 추가 */}
 
       <Spacing size={100} />
       
-      {/* 푸터 섹션 (인덱스 6) */}
-      <SlideUp show={transitionIds.includes(TITLE.length + 2)}>
+      {/* 푸터 섹션 (인덱스 5로 변경하여 신랑측 다음에 바로 등장하도록 수정) */}
+      <SlideUp show={transitionIds.includes(TITLE.length + 1)}>
         <FooterSection />
       </SlideUp>
     </>
