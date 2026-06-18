@@ -87,48 +87,7 @@ const AccountSection = ({ onDone }: { onDone: () => void }) => {
             </Arcodion.Content>
           </Arcodion>
         </SlideUp>
-        
-        <Spacing size={20} />
-        
-        {/* 신부측 아코디언 (인덱스 5) */}
-        <SlideUp show={transitionIds.includes(TITLE.length + 1)}>
-          <Arcodion>
-            <Arcodion.Header className="cursor-pointer w-full py-21.5pxr border-t border-black">
-              <Text>신부측 계좌번호</Text>
-              <Arcodion.Arrow />
-            </Arcodion.Header>
-            <Arcodion.Content>
-              {/* 신부 본인 */}
-              <Account
-                name="안희연"
-                bankInfo={{
-                  bankName: "토스뱅크",
-                  accountNumber: "100062438989"
-                }}
-              />
-              <Spacing size={12} />
-              {/* 신부 아버님 계좌 */}
-              <Account
-                name="아버지 안창덕"
-                bankInfo={{
-                  bankName: "농협",
-                  accountNumber: "23512031480"
-                }}
-              />
-              <Spacing size={12} />
-              {/* 신부 어머님 계좌 */}
-              <Account
-                name="어머니 김영미"
-                bankInfo={{
-                  bankName: "농협",
-                  accountNumber: "31701456061441"
-                }}
-              />
-            </Arcodion.Content>
-          </Arcodion>
-        </SlideUp>
-      </section>
-      
+
       <Spacing size={100} />
       
       {/* 푸터 섹션 (인덱스 6) */}
